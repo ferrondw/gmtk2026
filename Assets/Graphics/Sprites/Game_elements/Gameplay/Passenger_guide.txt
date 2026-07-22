@@ -1,0 +1,5 @@
+0 - pickup
+5 - Zitten in achterkant van boot
+6 - Lanceering naar doel
+
+Shader is nodig om kleuren te veranderen en te randomizen (BEHALVE DE GRIJS)

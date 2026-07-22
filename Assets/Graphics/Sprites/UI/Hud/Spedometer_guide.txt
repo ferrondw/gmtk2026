@@ -1,0 +1,8 @@
+Voor de  spedometer:
+
+- Lampjes geven movement aan
+    - Als je stil staat is het lampje uit
+    - Op accelerate blinkt het lampje
+    - Lampje staat aan als je gaat
+- Bar geeft je speed tot de softcap aan
+- Open space is voor de speed nummer (km/h)
