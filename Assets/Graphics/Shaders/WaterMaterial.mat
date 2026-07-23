@@ -53,7 +53,7 @@ Material:
     m_Floats:
     - _NoiseMovement: 0.5
     - _NoiseScaling: 0.6
-    - _PixelScaling: 180
+    - _PixelScaling: 12
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scaling: 12
@@ -64,6 +64,8 @@ Material:
     - _wobble: 0.06
     m_Colors:
     - _AccentColor: {r: 1, g: 1, b: 1, a: 0}
+    - _ReplaceColorAccent: {r: 0.9176471, g: 0.6784314, b: 0.9294118, a: 1}
+    - _ReplaceColorPrimary: {r: 0.30196077, g: 0.6078432, b: 0.9019608, a: 1}
     - _color: {r: 0.3539961, g: 0.6079286, b: 0.8726415, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
