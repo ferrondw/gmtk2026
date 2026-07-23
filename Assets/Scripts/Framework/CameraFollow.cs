@@ -4,6 +4,7 @@ public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private float smoothTime;
     [SerializeField] private Transform target;
+    [SerializeField] private float zoomOutScale = 0.4f;
     
     private Camera _cam;
     private Vector3 _velocity = Vector3.zero;
@@ -19,5 +20,6 @@ public class CameraFollow : MonoBehaviour
         var delta = target.position - _cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
         var destination = transform.position + delta;
         transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, smoothTime);
+        _cam.orthographicSize = 12 + _velocity.magnitude * zoomOutScale;
     }
 }
