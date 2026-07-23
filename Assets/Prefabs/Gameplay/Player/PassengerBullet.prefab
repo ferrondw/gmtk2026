@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d05c565c3e7b749ac6acafaa59c809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 17.5
+  stayTime: 1
   Passenger:
     DropoffId: 
     ColorScheme:

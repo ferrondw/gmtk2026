@@ -8,6 +8,7 @@ public class PassengerCabin : MonoBehaviour
     [SerializeField] private Transform passengerMuzzle;
     [SerializeField] private GameObject defaultPassengerProjectile;
     [SerializeField] private string projectileContainerTag = "ProjectileContainer";
+    [SerializeField] private PassengerArrow arrow;
 
     [Header("Rendering")]
     [SerializeField] private SpriteRenderer passengerRenderer;
@@ -45,6 +46,8 @@ public class PassengerCabin : MonoBehaviour
 
         passengerRenderer.sprite = defaultPassengerTexture;
         passengerRenderer.color = _currentPassenger.ColorScheme.BaseColor; // USE SHADER LATER
+
+        arrow.PointToDropoff(_currentPassenger);
     }
 
 
@@ -57,6 +60,7 @@ public class PassengerCabin : MonoBehaviour
     public void Launch()
     {
         passengerRenderer.sprite = null;
+        arrow.StopPointing();
 
         // Launch fx
 
