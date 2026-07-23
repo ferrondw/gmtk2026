@@ -47,6 +47,13 @@ public class PassengerDropoff : MonoBehaviour
         Debug.Log("Passenger delivered!");
     }
 
+    public void Miss()
+    {
+        // Remove time
+        Deactivate();
+        Debug.Log("Passenger Missed!");
+    }
+
     private void Deactivate()
     {
         innerRenderer.enabled = false;

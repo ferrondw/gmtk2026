@@ -5,12 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 public class PassengerCabin : MonoBehaviour
 {
+    [SerializeField] private Transform passengerMuzzle;
+    [SerializeField] private GameObject defaultPassengerProjectile;
+    [SerializeField] private string projectileContainerTag = "ProjectileContainer";
+
     [Header("Rendering")]
     [SerializeField] private SpriteRenderer passengerRenderer;
     [SerializeField] private Sprite defaultPassengerTexture;
 
     private Passenger _currentPassenger;
     private Collider2D _collider;
+    private Transform _projectileContainer;
 
     public bool HasPassenger => _currentPassenger != null;
 
@@ -19,6 +24,8 @@ public class PassengerCabin : MonoBehaviour
     {
         _collider = GetComponent<Collider2D>();
         _collider.isTrigger = true;
+
+        _projectileContainer = GameObject.FindGameObjectWithTag(projectileContainerTag).transform;
 
         passengerRenderer.sprite = null;
     }
@@ -40,10 +47,23 @@ public class PassengerCabin : MonoBehaviour
         passengerRenderer.color = _currentPassenger.ColorScheme.BaseColor; // USE SHADER LATER
     }
 
+
+    private void Update()
+    {
+        if (_currentPassenger == null) return;
+        if (Input.GetKeyUp(KeyCode.Space)) Launch();
+    }
+
     public void Launch()
     {
-        _currentPassenger = null;
         passengerRenderer.sprite = null;
-        // REMEMBER THAT IF PASSENGER MISSES IT SHOULD USE ITS ID TO DEACTIVATE ITS DROPOFF
+
+        // Launch fx
+
+        var projectile = Instantiate(defaultPassengerProjectile, passengerMuzzle.position, passengerMuzzle.rotation, _projectileContainer.transform);
+        var projectileComponent = projectile.GetComponent<PassengerBullet>();
+
+        projectileComponent.Passenger = _currentPassenger;
+        _currentPassenger = null;
     }
 }

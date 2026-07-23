@@ -106,4 +106,15 @@ public class PassengerPickup : MonoBehaviour
         yield return new WaitForSeconds(resetTime);
         Activate();
     }
+
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
+    private void OnApplicationQuit()
+    {
+        StopAllCoroutines();
+    }
 }
