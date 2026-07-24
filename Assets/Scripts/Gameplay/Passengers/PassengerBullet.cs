@@ -19,7 +19,6 @@ public class PassengerBullet : MonoBehaviour
 
     private bool _hit;
     private Rigidbody2D _rigidBody;
-    private SpriteRenderer _sprite;
 
     void Start()
     {
@@ -27,10 +26,13 @@ public class PassengerBullet : MonoBehaviour
         _rigidBody.isKinematic = true;
         _rigidBody.velocity = transform.right * speed;
 
-        _sprite = GetComponent<SpriteRenderer>();
-        _sprite.color = Passenger.ColorScheme.BaseColor; // USE SHADER
-
         OnStart.Invoke();
+    }
+
+    public void SetMaterial(Material newMaterial)
+    {
+        var sprite = GetComponent<SpriteRenderer>();
+        sprite.material = newMaterial;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,9 +43,9 @@ public class PassengerBullet : MonoBehaviour
             dropoff.Deliver(Passenger);
             _hit = true;
 
-            OnHitDropoff.Invoke(); 
-            Destroy(gameObject);
+            OnHitDropoff.Invoke();
 
+            Destroy(gameObject);
             return;
         }
     }

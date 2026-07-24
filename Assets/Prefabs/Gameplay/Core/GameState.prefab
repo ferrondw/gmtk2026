@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6151536965824578612}
   - component: {fileID: 4920748267339950525}
+  - component: {fileID: 7392815520611006432}
   m_Layer: 0
-  m_Name: Countdown
-  m_TagString: Timer
+  m_Name: GameState
+  m_TagString: GameState
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,5 +73,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnLose:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7392815520611006432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381418857125245134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99917b4ab674e5429e32487fce056bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnScoreUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnScoreChange:
     m_PersistentCalls:
       m_Calls: []

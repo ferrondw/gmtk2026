@@ -8,6 +8,7 @@ public class PassengerDropoff : MonoBehaviour
 {
     [SerializeField] public string DropoffId;
     [SerializeField] private int missCountdownPenalty = 15;
+    [SerializeField] private string gameStateTag = "GameState";
 
     [Header("Rendering")]
     [SerializeField] private SpriteRenderer innerRenderer;
@@ -23,6 +24,7 @@ public class PassengerDropoff : MonoBehaviour
 
     private Collider2D _collider;
     private Timer _timer;
+    private Score _score;
 
     private void Start()
     {
@@ -31,7 +33,9 @@ public class PassengerDropoff : MonoBehaviour
         _collider = GetComponent<Collider2D>();
         _collider.isTrigger = true;
 
-        _timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
+        var gameState = GameObject.FindGameObjectWithTag(gameStateTag);
+        _timer = gameState.GetComponent<Timer>();
+        _score = gameState.GetComponent<Score>();
 
         Deactivate();
     }
@@ -55,6 +59,7 @@ public class PassengerDropoff : MonoBehaviour
         if (deliveredPassenger.DropoffId != DropoffId) return;
 
         _timer.AddTime(20); // MAKE PASSENGERS CONTAIN MORE OR LESS TIME LATER TO PARSE IN
+        _score.AddScore(100); // MAKE PASSENGERS CONTAIN MORE OR LESS SCORE LATER TO PARSE IN
 
         Deactivate();
 

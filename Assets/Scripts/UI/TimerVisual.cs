@@ -10,7 +10,7 @@ public class TimerVisual : MonoBehaviour
     [SerializeField] private TextMeshProUGUI numericTimer;
     [SerializeField] private RectTransform clockArrow;
     [SerializeField] [Range(-360f, 0)] private float rotationPerSecond = -30f;
-    [SerializeField] private string timerTag = "Timer";
+    [SerializeField] private string gameStateTag = "GameState";
 
     [Header("Start Animation")]
     [SerializeField] private bool startHidden = true;
@@ -18,8 +18,8 @@ public class TimerVisual : MonoBehaviour
     [SerializeField] private EaseType scaleEaseType = EaseType.InCirc;
 
     [Header("Events")]
-    [SerializeField] public UnityEvent OnLoseTime;
-    [SerializeField] public UnityEvent OnAddedTime;
+    [SerializeField] public UnityEvent OnLoseTime = new();
+    [SerializeField] public UnityEvent OnAddedTime = new();
 
     private float _lastTimeUpdate;
     private RectTransform _rectTransform;
@@ -27,7 +27,7 @@ public class TimerVisual : MonoBehaviour
 
     private void Start()
     {
-        var timer = GameObject.FindGameObjectWithTag(timerTag).GetComponent<Timer>();
+        var timer = GameObject.FindGameObjectWithTag(gameStateTag).GetComponent<Timer>();
         timer.OnTimeUpdate.AddListener(DisplayTime);
 
         if (startHidden)

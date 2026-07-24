@@ -10,6 +10,7 @@ public class PassengerPickup : MonoBehaviour
     [SerializeField] private float maxResetTime = 15f;
     [SerializeField] private float stayTime = 20f;
     [SerializeField] private int extraTimeAdded = 3;
+    [SerializeField] private string gameStateTag = "GameState";
 
     [Header("Rendering")]
     [SerializeField] private SpriteRenderer passengerRenderer;
@@ -26,6 +27,7 @@ public class PassengerPickup : MonoBehaviour
     private Coroutine _currentStayCoroutine;
 
     private PassengerColorScheme _currentPassengerColorScheme;
+    private Material _passengerMaterial;
     private Collider2D _collider;
     private Timer _timer;
 
@@ -34,7 +36,8 @@ public class PassengerPickup : MonoBehaviour
         _collider = GetComponent<Collider2D>();
         _collider.isTrigger = true;
 
-        _timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
+        _timer = GameObject.FindGameObjectWithTag(gameStateTag).GetComponent<Timer>();
+        colors.CreateMaterials();
 
         Activate();
     }
@@ -48,7 +51,8 @@ public class PassengerPickup : MonoBehaviour
         _collider.enabled = true;
 
         _currentPassengerColorScheme = colors.GetRandomColorScheme();
-        passengerRenderer.color = _currentPassengerColorScheme.BaseColor; // USE SHADER LATER
+        _passengerMaterial = colors.GetColorSchemeMaterial(_currentPassengerColorScheme);
+        passengerRenderer.material = _passengerMaterial;
 
         _isActive = true;
 
@@ -92,7 +96,7 @@ public class PassengerPickup : MonoBehaviour
         dropoff.Activate(_currentPassengerColorScheme.BaseColor);
 
         var newPassenger = new Passenger(id, _currentPassengerColorScheme);
-        cabin.Pickup(newPassenger);
+        cabin.Pickup(newPassenger, _passengerMaterial);
 
         _timer.AddTime(extraTimeAdded);
 

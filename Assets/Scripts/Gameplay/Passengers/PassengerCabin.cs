@@ -22,6 +22,7 @@ public class PassengerCabin : MonoBehaviour
     [SerializeField] public UnityEvent OnLaunch = new();
 
     private Passenger _currentPassenger;
+    private Material _passengerMaterial;
     private Collider2D _collider;
     private Transform _projectileContainer;
 
@@ -38,7 +39,7 @@ public class PassengerCabin : MonoBehaviour
         passengerRenderer.sprite = null;
     }
 
-    public void Pickup(Passenger newPassenger)
+    public void Pickup(Passenger newPassenger, Material newPassengerMaterial)
     {
         if (HasPassenger)
         {
@@ -53,7 +54,8 @@ public class PassengerCabin : MonoBehaviour
         Debug.Log("Delivery ID: " + _currentPassenger.DropoffId);
 
         passengerRenderer.sprite = defaultPassengerTexture;
-        passengerRenderer.color = _currentPassenger.ColorScheme.BaseColor; // USE SHADER LATER
+        _passengerMaterial = newPassengerMaterial;
+        passengerRenderer.material = _passengerMaterial;
 
         arrow.PointToDropoff(_currentPassenger);
 
@@ -77,6 +79,8 @@ public class PassengerCabin : MonoBehaviour
         var projectileComponent = projectile.GetComponent<PassengerBullet>();
 
         projectileComponent.Passenger = _currentPassenger;
+        projectileComponent.SetMaterial(_passengerMaterial);
+
         _currentPassenger = null;
 
         OnLaunch.Invoke();
