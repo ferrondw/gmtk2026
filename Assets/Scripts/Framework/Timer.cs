@@ -46,8 +46,6 @@ public class Timer : MonoBehaviour
     {
         yield return new WaitForSeconds(startWait);
 
-        OnTimeUpdate.Invoke(_currentTime); // Makes sure anyone tracking time is awre before visible
-
         Debug.Log("Starting start signal timer");
 
         OnBegin.Invoke();
