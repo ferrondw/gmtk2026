@@ -1,10 +1,31 @@
 fileFormatVersion: 2
-guid: 649b2230eaa9ca344a51fea300206e00
+guid: f9d510dc687a54e4a898f1e1ef9b6e3c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7320058339839183385
-    second: Player_boat_0
+      213: 86944815736868069
+    second: Police_boat_0
+  - first:
+      213: -329883767313095203
+    second: Police_boat_1
+  - first:
+      213: 5828003292720607335
+    second: Police_boat_2
+  - first:
+      213: -5424626130801857382
+    second: Police_boat_3
+  - first:
+      213: -3489570927514472539
+    second: Police_boat_4
+  - first:
+      213: -3188853506121992815
+    second: Police_boat_5
+  - first:
+      213: -1849850592875523261
+    second: Police_boat_6
+  - first:
+      213: 989302163137318214
+    second: Police_boat_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +147,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_boat_0
+      name: Police_boat_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 30
-        width: 74
-        height: 20
+        x: 0
+        y: 29
+        width: 76
+        height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,71 +161,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 91a0049d642169560800000000000000
-      internalID: 7320058339839183385
+      spriteID: 5ecce0969d3e43100800000000000000
+      internalID: 86944815736868069
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_boat_1
+      name: Police_boat_1
       rect:
         serializedVersion: 2
         x: 170
-        y: 30
+        y: 29
         width: 66
-        height: 20
+        height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 113390f914bc90d4eb1eaa3df028bad9
-      internalID: -95956059
+      spriteID: dd5a22026740c6bf0800000000000000
+      internalID: -329883767313095203
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_boat_2
+      name: Police_boat_2
       rect:
         serializedVersion: 2
-        x: 276
-        y: 36
-        width: 16
-        height: 8
+        x: 250
+        y: 29
+        width: 66
+        height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 64b023bc39ed00f4bbfee42bb1691f1d
-      internalID: -1135970751
+      spriteID: 7603b6cdd1a31e050800000000000000
+      internalID: 5828003292720607335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_boat_3
+      name: Police_boat_3
       rect:
         serializedVersion: 2
-        x: 352
+        x: 330
+        y: 29
+        width: 66
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9ce042664bd7b4b0800000000000000
+      internalID: -5424626130801857382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_boat_4
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 29
+        width: 66
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5af28fedabd829fc0800000000000000
+      internalID: -3489570927514472539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_boat_6
+      rect:
+        serializedVersion: 2
+        x: 517
         y: 35
-        width: 14
+        width: 5
         height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 427094694d1a2cc4587365ecdfd3b359
-      internalID: -483994692
+      spriteID: 343db1ccfa20456e0800000000000000
+      internalID: -1849850592875523261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Police_boat_7
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 34
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64d43596315babd00800000000000000
+      internalID: 989302163137318214
       vertices: []
       indices: 
       edges: []
@@ -212,7 +296,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: e21c34afcdaef7a48bdf130b87c4040f
     internalID: 0
     vertices: []
     indices: 
@@ -220,10 +304,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_boat_0: 7320058339839183385
-      Player_boat_1: -95956059
-      Player_boat_2: -1135970751
-      Player_boat_3: -483994692
+      Police_boat_0: 86944815736868069
+      Police_boat_1: -329883767313095203
+      Police_boat_2: 5828003292720607335
+      Police_boat_3: -5424626130801857382
+      Police_boat_4: -3489570927514472539
+      Police_boat_5: -3188853506121992815
+      Police_boat_6: -1849850592875523261
+      Police_boat_7: 989302163137318214
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
