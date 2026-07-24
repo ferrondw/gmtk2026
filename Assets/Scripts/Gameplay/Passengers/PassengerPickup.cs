@@ -27,6 +27,7 @@ public class PassengerPickup : MonoBehaviour
     private Passenger _passenger;
     private bool _isActive;
     private Coroutine _currentStayCoroutine;
+    private WaitForSeconds _stayTimer;
 
     private Material _passengerMaterial;
 
@@ -40,6 +41,8 @@ public class PassengerPickup : MonoBehaviour
 
         _timer = GameObject.FindGameObjectWithTag(gameStateTag).GetComponent<Timer>();
         colors.CreateMaterials();
+
+        _stayTimer = new WaitForSeconds(stayTime);
 
         Activate();
     }
@@ -89,7 +92,7 @@ public class PassengerPickup : MonoBehaviour
 
     private IEnumerator StayTimeCoroutine()
     {
-        yield return new WaitForSeconds(stayTime);
+        yield return _stayTimer;
         Deactivate();
     }
 
@@ -133,13 +136,7 @@ public class PassengerPickup : MonoBehaviour
     }
 
 
-    private void OnDestroy()
-    {
-        StopAllCoroutines();
-    }
-
-    private void OnApplicationQuit()
-    {
-        StopAllCoroutines();
-    }
+    private void OnDisable() { StopAllCoroutines(); }
+    private void OnDestroy() { StopAllCoroutines(); }
+    private void OnApplicationQuit() { StopAllCoroutines(); }
 }

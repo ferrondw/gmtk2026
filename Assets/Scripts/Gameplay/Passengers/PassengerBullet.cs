@@ -17,6 +17,7 @@ public class PassengerBullet : MonoBehaviour
 
     private Passenger _passenger;
     private PassengerDropoff _dropoff;
+    private WaitForSeconds _stayTimer;
 
     private bool _hit;
     private Rigidbody2D _rigidBody;
@@ -26,6 +27,8 @@ public class PassengerBullet : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _rigidBody.isKinematic = true;
         _rigidBody.velocity = transform.right * speed;
+
+        _stayTimer = new WaitForSeconds(stayTime);
 
         OnStart.Invoke();
     }
@@ -73,20 +76,14 @@ public class PassengerBullet : MonoBehaviour
 
     private IEnumerator StayTimeCoroutine()
     {
-        yield return new WaitForSeconds(stayTime);
+        yield return _stayTimer;
         _dropoff.Miss();
 
         Destroy(gameObject);
     }
 
 
-    private void OnDestroy()
-    {
-        StopAllCoroutines();
-    }
-
-    private void OnApplicationQuit()
-    {
-        StopAllCoroutines();
-    }
+    private void OnDisable() { StopAllCoroutines(); }
+    private void OnDestroy() { StopAllCoroutines(); }
+    private void OnApplicationQuit() { StopAllCoroutines(); }
 }

@@ -161,11 +161,12 @@ namespace Advanced_Audio_Sources.scripts.AudioSources
             Action method = pausing ? _audioSource.Pause : _audioSource.UnPause;
             method.Invoke();
         }
-        
-        
+
+
         // Misc functions
-        private void OnDestroy() { StopAllCoroutines(); }
         private void OnDisable() { StopAllCoroutines(); }
+        private void OnDestroy() { StopAllCoroutines(); }
+        private void OnApplicationQuit() { StopAllCoroutines(); }
     }
 }
     

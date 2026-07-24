@@ -31,11 +31,18 @@ public class Timer : MonoBehaviour
 
     private float _currentTime;
     private int _loops;
+
+    private WaitForSeconds _startWaitTimer;
+    private WaitForSeconds _startSignalTimer;
     private WaitForSeconds _currentTimePerSecond;
+
 
     private void Start()
     {
         _currentTime = startTime;
+        _startWaitTimer = new WaitForSeconds(startWait);
+        _startSignalTimer = new WaitForSeconds(startTimePerSecond);
+
         SetNewCountdownSeconds(timePerSecond);
         StartCoroutine(TimeToStartCoroutine());
     }
@@ -44,14 +51,14 @@ public class Timer : MonoBehaviour
 
     private IEnumerator TimeToStartCoroutine()
     {
-        yield return new WaitForSeconds(startWait);
+        yield return _startWaitTimer;
 
         Debug.Log("Starting start signal timer");
 
         OnBegin.Invoke();
         for (int time = timeToStart; time > 0; time--)
         {
-            yield return new WaitForSeconds(startTimePerSecond);
+            yield return _startSignalTimer;
             OnTimeStartUpdate.Invoke(time);
             OnStartDeplete.Invoke();
         }
@@ -112,13 +119,7 @@ public class Timer : MonoBehaviour
     }
 
 
-    private void OnApplicationQuit()
-    {
-        StopAllCoroutines();
-    }
-
-    private void OnDestroy()
-    {
-        StopAllCoroutines();
-    }
+    private void OnDisable() { StopAllCoroutines(); }
+    private void OnDestroy() { StopAllCoroutines(); }
+    private void OnApplicationQuit() { StopAllCoroutines(); }
 }
