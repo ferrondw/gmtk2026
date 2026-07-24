@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: DefaultPassenger
   m_Shader: {fileID: -6465566751694194690, guid: 7cf6a925de6267844a499b1bf81ab99a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

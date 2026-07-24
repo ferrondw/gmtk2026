@@ -14,27 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   personalities:
   - ZoneColor: {r: 0.32941177, g: 0.8745099, b: 0.7254902, a: 1}
-    MoodStates: 0
-    Score: 0
-    Time: 0
+    MoodStates: 8
+    Score: 100
+    Time: 6
     PoliceRisk: 0
   - ZoneColor: {r: 0.5882353, g: 0.854902, b: 0.427451, a: 1}
-    MoodStates: 0
-    Score: 0
-    Time: 0
-    PoliceRisk: 0
+    MoodStates: 8
+    Score: 250
+    Time: 12
+    PoliceRisk: 2
   - ZoneColor: {r: 0.95294124, g: 0.7686275, b: 0.227451, a: 1}
-    MoodStates: 0
-    Score: 0
-    Time: 0
-    PoliceRisk: 0
+    MoodStates: 6
+    Score: 500
+    Time: 12
+    PoliceRisk: 5
   - ZoneColor: {r: 0.8745099, g: 0.27058825, b: 0.25490198, a: 1}
-    MoodStates: 0
-    Score: 0
-    Time: 0
-    PoliceRisk: 0
+    MoodStates: 5
+    Score: 1000
+    Time: 20
+    PoliceRisk: 8
   - ZoneColor: {r: 0.90196085, g: 0.5137255, b: 0.6039216, a: 1}
-    MoodStates: 0
-    Score: 0
-    Time: 0
-    PoliceRisk: 0
+    MoodStates: 4
+    Score: 2000
+    Time: 25
+    PoliceRisk: 10

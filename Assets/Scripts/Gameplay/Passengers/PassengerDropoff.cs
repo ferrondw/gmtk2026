@@ -26,9 +26,10 @@ public class PassengerDropoff : MonoBehaviour
     private Timer _timer;
     private Score _score;
 
-    private void Start()
+    private void Awake()
     {
         instances.Add(this);
+        Debug.Log("Added dropoff " + DropoffId);
 
         _collider = GetComponent<Collider2D>();
         _collider.isTrigger = true;

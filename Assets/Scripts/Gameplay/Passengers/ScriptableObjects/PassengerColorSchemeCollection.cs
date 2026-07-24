@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 [CreateAssetMenu(fileName = "NewPassengerColorSchemeCollection", menuName = "Boat Game/New Passenger ColorScheme Collection")]
 public class PassengerColorSchemeCollection : ScriptableObject
 {
     [SerializeField] private List<PassengerColorScheme> passengerColors;
+    [SerializeField] private Material defaultMaterial;
 
-    private const string MaterialName = "Shader Graphs/Passenger";
     private const string MaterialBaseColor = "_SkinColor";
     private const string MaterialAccentColor = "_ClothesColor";
 
-    private List<Material> _materials;
+    private List<Material> _materials = new();
 
     public PassengerColorScheme GetRandomColorScheme()
     {
@@ -34,7 +33,7 @@ public class PassengerColorSchemeCollection : ScriptableObject
 
         foreach (var colorScheme in passengerColors)
         {
-            var newMaterial = new Material(Shader.Find(MaterialName));
+            var newMaterial = new Material(defaultMaterial);
 
             newMaterial.EnableKeyword(MaterialBaseColor);
             newMaterial.EnableKeyword(MaterialAccentColor);
