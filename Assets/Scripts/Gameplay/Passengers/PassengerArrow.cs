@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Yakapedia;
 
 public class PassengerArrow : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer innerArrow;
+
+    [Header("Events")]
+    [SerializeField] public UnityEvent OnPoint = new();
+    [SerializeField] public UnityEvent OnStop = new();
 
     private Vector2 _targetPosition = Vector2.zero;
 
@@ -22,6 +27,8 @@ public class PassengerArrow : MonoBehaviour
         transform.LookAt2D(_targetPosition);
 
         gameObject.SetActive(true);
+
+        OnPoint.Invoke();
     }
 
     private void FixedUpdate()
@@ -34,5 +41,7 @@ public class PassengerArrow : MonoBehaviour
     {
         gameObject.SetActive(false);
         _targetPosition = Vector2.zero;
+
+        OnStop.Invoke();
     }
 }

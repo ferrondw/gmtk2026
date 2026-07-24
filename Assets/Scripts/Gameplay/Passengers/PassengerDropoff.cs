@@ -1,20 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class PassengerDropoff : MonoBehaviour
 {
     [SerializeField] public string DropoffId;
+    [SerializeField] private int missCountdownPenalty = 15;
 
     [Header("Rendering")]
     [SerializeField] private SpriteRenderer innerRenderer;
     [SerializeField] private SpriteRenderer outerRenderer;
     [SerializeField] private SpriteRenderer targetRenderer;
 
+    [Header("Events")]
+    [SerializeField] public UnityEvent OnActivate = new();
+    [SerializeField] public UnityEvent OnDeliver = new();
+    [SerializeField] public UnityEvent OnMiss = new();
+
     public static List<PassengerDropoff> instances = new List<PassengerDropoff>();
 
     private Collider2D _collider;
+    private Timer _timer;
 
     private void Start()
     {
@@ -22,6 +30,8 @@ public class PassengerDropoff : MonoBehaviour
 
         _collider = GetComponent<Collider2D>();
         _collider.isTrigger = true;
+
+        _timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
 
         Deactivate();
     }
@@ -36,21 +46,29 @@ public class PassengerDropoff : MonoBehaviour
         targetRenderer.color = zoneColor;
 
         _collider.enabled = true;
+
+        OnActivate.Invoke();
     }
 
     public void Deliver(Passenger deliveredPassenger)
     {
         if (deliveredPassenger.DropoffId != DropoffId) return;
 
-        // MORE TIME AND SCORE
+        _timer.AddTime(20); // MAKE PASSENGERS CONTAIN MORE OR LESS TIME LATER TO PARSE IN
+
         Deactivate();
+
+        OnDeliver.Invoke();
         Debug.Log("Passenger delivered!");
     }
 
     public void Miss()
     {
-        // Remove time
+        _timer.RemoveTime(missCountdownPenalty);
+
         Deactivate();
+
+        OnMiss.Invoke();
         Debug.Log("Passenger Missed!");
     }
 

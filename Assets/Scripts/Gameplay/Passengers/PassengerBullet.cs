@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class PassengerBullet : MonoBehaviour
 {
     [SerializeField] private float speed = 20f;
     [SerializeField] private float stayTime = 1f;
+
+    [Header("Events")]
+    [SerializeField] public UnityEvent OnHitDropoff = new();
+    [SerializeField] public UnityEvent OnHitPolice = new();
+    [SerializeField] public UnityEvent OnStart = new();
 
     public Passenger Passenger;
 
@@ -23,6 +29,8 @@ public class PassengerBullet : MonoBehaviour
 
         _sprite = GetComponent<SpriteRenderer>();
         _sprite.color = Passenger.ColorScheme.BaseColor; // USE SHADER
+
+        OnStart.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,7 +41,7 @@ public class PassengerBullet : MonoBehaviour
             dropoff.Deliver(Passenger);
             _hit = true;
 
-            // DO SOME FX
+            OnHitDropoff.Invoke(); 
             Destroy(gameObject);
 
             return;

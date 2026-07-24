@@ -305,9 +305,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropoffId: 
+  missCountdownPenalty: 15
   innerRenderer: {fileID: 5694697186853167278}
   outerRenderer: {fileID: 863297801878821644}
   targetRenderer: {fileID: 1888015561812121403}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeliver:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMiss:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8580026976418121797
 GameObject:
   m_ObjectHideFlags: 0

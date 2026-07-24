@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class PassengerCabin : MonoBehaviour
@@ -13,6 +14,12 @@ public class PassengerCabin : MonoBehaviour
     [Header("Rendering")]
     [SerializeField] private SpriteRenderer passengerRenderer;
     [SerializeField] private Sprite defaultPassengerTexture;
+
+    [Header("Events")]
+    [SerializeField] public UnityEvent OnFull = new();
+    [SerializeField] public UnityEvent OnPickup = new();
+    [SerializeField] public UnityEvent OnHoldLaunch = new();
+    [SerializeField] public UnityEvent OnLaunch = new();
 
     private Passenger _currentPassenger;
     private Collider2D _collider;
@@ -35,6 +42,7 @@ public class PassengerCabin : MonoBehaviour
     {
         if (HasPassenger)
         {
+            OnFull.Invoke();
             Debug.Log("Player already has a passenger!");
             return;
         }
@@ -48,12 +56,15 @@ public class PassengerCabin : MonoBehaviour
         passengerRenderer.color = _currentPassenger.ColorScheme.BaseColor; // USE SHADER LATER
 
         arrow.PointToDropoff(_currentPassenger);
+
+        OnPickup.Invoke();
     }
 
 
     private void Update()
     {
         if (_currentPassenger == null) return;
+        if (Input.GetKeyDown(KeyCode.Space)) OnHoldLaunch.Invoke();
         if (Input.GetKeyUp(KeyCode.Space)) Launch();
     }
 
@@ -62,12 +73,12 @@ public class PassengerCabin : MonoBehaviour
         passengerRenderer.sprite = null;
         arrow.StopPointing();
 
-        // Launch fx
-
         var projectile = Instantiate(defaultPassengerProjectile, passengerMuzzle.position, passengerMuzzle.rotation, _projectileContainer.transform);
         var projectileComponent = projectile.GetComponent<PassengerBullet>();
 
         projectileComponent.Passenger = _currentPassenger;
         _currentPassenger = null;
+
+        OnLaunch.Invoke();
     }
 }

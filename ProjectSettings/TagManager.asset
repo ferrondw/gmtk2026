@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BoostPanel
   - ProjectileContainer
+  - Timer
   layers:
   - Default
   - TransparentFX

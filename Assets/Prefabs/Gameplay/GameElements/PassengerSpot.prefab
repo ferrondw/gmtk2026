@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 174777391290348920}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07800102, y: -0.3606801, z: 3.2988777}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 1177501731331667343}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07800102, y: -0.3606801, z: 3.2988777}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -123,6 +123,15 @@ MonoBehaviour:
   zoneRenderer: {fileID: 3977077719981234798}
   outerZoneRenderer: {fileID: 2260695188390493140}
   colors: {fileID: 11400000, guid: 99efeaf9d28162247bbff955a50632e5, type: 2}
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPickup:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!212 &8156581493161994238
 SpriteRenderer:
   m_ObjectHideFlags: 0
