@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33d2925093ebbc48a5ada420d96b06b, type: 3}
+  m_Name: DefaultPersonas
+  m_EditorClassIdentifier: 
+  personalities:
+  - ZoneColor: {r: 0.32941177, g: 0.8745099, b: 0.7254902, a: 1}
+    MoodStates: 0
+    Score: 0
+    Time: 0
+    PoliceRisk: 0
+  - ZoneColor: {r: 0.5882353, g: 0.854902, b: 0.427451, a: 1}
+    MoodStates: 0
+    Score: 0
+    Time: 0
+    PoliceRisk: 0
+  - ZoneColor: {r: 0.95294124, g: 0.7686275, b: 0.227451, a: 1}
+    MoodStates: 0
+    Score: 0
+    Time: 0
+    PoliceRisk: 0
+  - ZoneColor: {r: 0.8745099, g: 0.27058825, b: 0.25490198, a: 1}
+    MoodStates: 0
+    Score: 0
+    Time: 0
+    PoliceRisk: 0
+  - ZoneColor: {r: 0.90196085, g: 0.5137255, b: 0.6039216, a: 1}
+    MoodStates: 0
+    Score: 0
+    Time: 0
+    PoliceRisk: 0

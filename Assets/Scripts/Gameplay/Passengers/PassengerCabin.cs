@@ -78,7 +78,7 @@ public class PassengerCabin : MonoBehaviour
         var projectile = Instantiate(defaultPassengerProjectile, passengerMuzzle.position, passengerMuzzle.rotation, _projectileContainer.transform);
         var projectileComponent = projectile.GetComponent<PassengerBullet>();
 
-        projectileComponent.Passenger = _currentPassenger;
+        projectileComponent.SetPassenger(_currentPassenger);
         projectileComponent.SetMaterial(_passengerMaterial);
 
         _currentPassenger = null;

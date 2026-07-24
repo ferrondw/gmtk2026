@@ -121,7 +121,7 @@ MonoBehaviour:
   stayTime: 20
   extraTimeAdded: 3
   gameStateTag: GameState
-  basePassengerMaterial: {fileID: 2100000, guid: 972058c6604f11f4784afaebde034ffe, type: 2}
+  personas: {fileID: 11400000, guid: 0888507a6d52b224e9cf21991ad78fd2, type: 2}
   passengerRenderer: {fileID: 8156581493161994238}
   zoneRenderer: {fileID: 3977077719981234798}
   outerZoneRenderer: {fileID: 2260695188390493140}

@@ -11,6 +11,7 @@ public class PassengerPickup : MonoBehaviour
     [SerializeField] private float stayTime = 20f;
     [SerializeField] private int extraTimeAdded = 3;
     [SerializeField] private string gameStateTag = "GameState";
+    [SerializeField] private PassengerPersonalityCollection personas;
 
     [Header("Rendering")]
     [SerializeField] private SpriteRenderer passengerRenderer;
@@ -23,11 +24,12 @@ public class PassengerPickup : MonoBehaviour
     [SerializeField] public UnityEvent OnDeactivate = new();
     [SerializeField] public UnityEvent OnPickup = new();
 
+    private Passenger _passenger;
     private bool _isActive;
     private Coroutine _currentStayCoroutine;
 
-    private PassengerColorScheme _currentPassengerColorScheme;
     private Material _passengerMaterial;
+
     private Collider2D _collider;
     private Timer _timer;
 
@@ -44,15 +46,21 @@ public class PassengerPickup : MonoBehaviour
 
     private void Activate()
     {
+        _collider.enabled = true;
+
+        var passengerColorScheme = colors.GetRandomColorScheme();
+        _passengerMaterial = colors.GetColorSchemeMaterial(passengerColorScheme);
+        passengerRenderer.material = _passengerMaterial;
+
+        var personality = personas.GetRandomPersona();
+        outerZoneRenderer.color = personality.ZoneColor;
+
+        var id = PassengerDropoff.GetRandomDropoffId();
+        _passenger = new Passenger(id, passengerColorScheme, personality.MoodStates, personality.Score, personality.Time, personality.PoliceRisk);
+
         passengerRenderer.enabled = true;
         zoneRenderer.enabled = true;
         outerZoneRenderer.enabled = true;
-
-        _collider.enabled = true;
-
-        _currentPassengerColorScheme = colors.GetRandomColorScheme();
-        _passengerMaterial = colors.GetColorSchemeMaterial(_currentPassengerColorScheme);
-        passengerRenderer.material = _passengerMaterial;
 
         _isActive = true;
 
@@ -91,12 +99,9 @@ public class PassengerPickup : MonoBehaviour
         if (cabin == null) return;
         if (cabin.HasPassenger) return;
 
-        var id = PassengerDropoff.GetRandomDropoffId();
-        var dropoff = PassengerDropoff.GetPassengerDropoff(id);
-        dropoff.Activate(_currentPassengerColorScheme.BaseColor);
-
-        var newPassenger = new Passenger(id, _currentPassengerColorScheme);
-        cabin.Pickup(newPassenger, _passengerMaterial);
+        var dropoff = PassengerDropoff.GetPassengerDropoff(_passenger.DropoffId);
+        dropoff.Activate(_passenger.ColorScheme.BaseColor);
+        cabin.Pickup(_passenger, _passengerMaterial);
 
         _timer.AddTime(extraTimeAdded);
 

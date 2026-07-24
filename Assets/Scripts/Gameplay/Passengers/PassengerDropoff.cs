@@ -58,8 +58,8 @@ public class PassengerDropoff : MonoBehaviour
     {
         if (deliveredPassenger.DropoffId != DropoffId) return;
 
-        _timer.AddTime(20); // MAKE PASSENGERS CONTAIN MORE OR LESS TIME LATER TO PARSE IN
-        _score.AddScore(100); // MAKE PASSENGERS CONTAIN MORE OR LESS SCORE LATER TO PARSE IN
+        _timer.AddTime(deliveredPassenger.Time);
+        _score.AddScore(deliveredPassenger.Score);
 
         Deactivate();
 
