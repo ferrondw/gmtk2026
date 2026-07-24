@@ -6,10 +6,15 @@ using UnityEngine.Events;
 [RequireComponent(typeof(CircleCollider2D))]
 public class PassengerCabin : MonoBehaviour
 {
+    [Header("Projectile")]
     [SerializeField] private Transform passengerMuzzle;
     [SerializeField] private GameObject defaultPassengerProjectile;
     [SerializeField] private string projectileContainerTag = "ProjectileContainer";
     [SerializeField] private PassengerArrow arrow;
+
+    [Header("Mood")]
+    [SerializeField] private float moodTimeout = 5f;
+    [SerializeField] private int lowMoodDivision = 3;
 
     [Header("Rendering")]
     [SerializeField] private SpriteRenderer passengerRenderer;
@@ -18,6 +23,11 @@ public class PassengerCabin : MonoBehaviour
     [Header("Events")]
     [SerializeField] public UnityEvent OnFull = new();
     [SerializeField] public UnityEvent OnPickup = new();
+
+    [SerializeField] public UnityEvent OnMoodChange = new();
+    [SerializeField] public UnityEvent OnLowMood = new();
+    [SerializeField] public UnityEvent OnPassengerLost = new();
+
     [SerializeField] public UnityEvent OnHoldLaunch = new();
     [SerializeField] public UnityEvent OnLaunch = new();
 
@@ -25,6 +35,10 @@ public class PassengerCabin : MonoBehaviour
     private Material _passengerMaterial;
     private Collider2D _collider;
     private Transform _projectileContainer;
+
+    private int _currentMood;
+    private int _maxMood;
+    private WaitForSeconds _moodTimer;
 
     public bool HasPassenger => _currentPassenger != null;
 
@@ -35,6 +49,7 @@ public class PassengerCabin : MonoBehaviour
         _collider.isTrigger = true;
 
         _projectileContainer = GameObject.FindGameObjectWithTag(projectileContainerTag).transform;
+        _moodTimer = new WaitForSeconds(moodTimeout);
 
         passengerRenderer.sprite = null;
     }
@@ -47,6 +62,7 @@ public class PassengerCabin : MonoBehaviour
             Debug.Log("Player already has a passenger!");
             return;
         }
+        StopAllCoroutines();
 
         _currentPassenger = newPassenger;
 
@@ -57,9 +73,41 @@ public class PassengerCabin : MonoBehaviour
         _passengerMaterial = newPassengerMaterial;
         passengerRenderer.material = _passengerMaterial;
 
+        _maxMood = newPassenger.MoodStates;
+        _currentMood = _maxMood;
+
+        StartCoroutine(MoodLoop());
+
         arrow.PointToDropoff(_currentPassenger);
 
         OnPickup.Invoke();
+    }
+
+
+    private IEnumerator MoodLoop()
+    {
+        yield return _moodTimer;
+        ImpactMood();
+    }
+
+    public void ImpactMood(int moodDamage = 1)
+    {
+        StopAllCoroutines();
+
+        Debug.Log("Passenger mood damage taken! Mood from " + _currentMood.ToString() + " to " + (_currentMood - moodDamage).ToString());
+
+        _currentMood -= moodDamage;
+        OnMoodChange.Invoke();
+
+        if (_currentMood <= 0)
+        {
+            Launch();
+            OnPassengerLost.Invoke();
+            return;
+        }
+        if (_currentMood == Mathf.FloorToInt(_maxMood / lowMoodDivision)) OnLowMood.Invoke();
+
+        StartCoroutine(MoodLoop());
     }
 
 
@@ -72,6 +120,8 @@ public class PassengerCabin : MonoBehaviour
 
     public void Launch()
     {
+        StopAllCoroutines();
+
         passengerRenderer.sprite = null;
         arrow.StopPointing();
 
@@ -85,4 +135,9 @@ public class PassengerCabin : MonoBehaviour
 
         OnLaunch.Invoke();
     }
+
+
+    private void OnDisable() { StopAllCoroutines(); }
+    private void OnDestroy() { StopAllCoroutines(); }
+    private void OnApplicationQuit() { StopAllCoroutines(); }
 }
