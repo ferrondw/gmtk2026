@@ -16,6 +16,10 @@ public class Boat : MonoBehaviour
     [SerializeField] private ParticleSystem boatWaterParticles;
     [SerializeField] private ParticleSystem boatFireParticles;
 
+    [SerializeField] private bool disableOnStart;
+
+    private bool _locked;
+
     private Rigidbody2D _rb;
     private Vector2 _inputVector;
     private float _rotationAngle;
@@ -27,15 +31,21 @@ public class Boat : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         boatWaterParticles.Play();
+        SetLocked(disableOnStart);
     }
+
+    public void SetLocked(bool newLock) => _locked = newLock;
 
     private void Update()
     {
+        if (_locked) return;
         _inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     private void FixedUpdate()
     {
+        if (_locked) return;
+
         _rotationAngle -= _inputVector.x * steerMultiplier * Mathf.Clamp01(_rb.velocity.magnitude / (_boosting ? boostSteerLimiterMultiplier : steerLimiterMultiplier));
         _rb.MoveRotation(_rotationAngle);
         // speedometer.localEulerAngles = new Vector3(0, 0, Mathf.Lerp(100f, -100f, Mathf.Clamp01(_rb.velocity.magnitude / minMaxSpeed.y)));
