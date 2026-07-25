@@ -116,7 +116,7 @@ public class PassengerCabin : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (HasPassenger == true) OnHoldLaunch.Invoke();
+            if (HasPassenger) OnHoldLaunch.Invoke();
         }
         if (Input.GetKeyUp(KeyCode.Space)) Launch();
     }

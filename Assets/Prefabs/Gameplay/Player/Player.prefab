@@ -5032,7 +5032,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 8854e5a4d36f04040854b970b68f3a50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10013,7 +10013,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 10e726cdec9381344a609cab37028549, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -19873,12 +19873,19 @@ MonoBehaviour:
   accelerationMultiplier: 16
   steerMultiplier: 2
   steerLimiterMultiplier: 2
-  boostDuration: 3
+  boostDuration: 1.5
   boostSpeed: 36
   boostSteerLimiterMultiplier: 30
   boostAmountMultiplier: 0.7
   jumpDuration: 2
   jumpScale: {x: 1.4, y: 1.4, z: 1.4}
+  spriteRenderers:
+  - {fileID: 7901190268331693309}
+  - {fileID: 8318840986160573803}
+  - {fileID: 8479703699905836725}
+  - {fileID: 427405291410790895}
+  normalLayer: 0
+  jumpLayer: 3
   speedometer: {fileID: 0}
   boatVisual: {fileID: 4406925622285115757}
   boatWaterParticles: {fileID: 525179333722207576}
@@ -19899,6 +19906,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnStuck:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &8867757464028800005
 Rigidbody2D:
   serializedVersion: 4

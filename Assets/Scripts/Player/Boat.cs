@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Yakanashe.Yautl;
@@ -20,6 +22,9 @@ public class Boat : MonoBehaviour
     [Header("Jumping")]
     [SerializeField] private float jumpDuration = 2f;
     [SerializeField] private Vector3 jumpScale = new(1.4f, 1.4f, 1.4f);
+    [SerializeField] private List<SpriteRenderer> spriteRenderers = new();
+    [SerializeField] private int normalLayer;
+    [SerializeField] private int jumpLayer = 3;
 
     [Header("Visuals")]
     [SerializeField] private Transform speedometer;
@@ -32,6 +37,7 @@ public class Boat : MonoBehaviour
 
     [Header("Events")]
     [SerializeField] public UnityEvent OnBump;
+    [SerializeField] public UnityEvent OnStuck;
 
     private bool _locked;
 
@@ -39,6 +45,7 @@ public class Boat : MonoBehaviour
     private Collider2D _collider;
     private Vector2 _inputVector;
     private float _rotationAngle;
+    private Vector2 _originPosition;
 
     private Coroutine _jumpCoroutine;
     private Coroutine _boostCoroutine;
@@ -50,6 +57,7 @@ public class Boat : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
+        _originPosition = transform.position;
         boatWaterParticles.Play();
         SetLocked(disableOnStart);
     }
@@ -119,24 +127,41 @@ public class Boat : MonoBehaviour
             yield return null;
         }
         
+        StopBoost();
+        
+        yield return null;
+    }
+
+    private void StopBoost()
+    {
         _boosting = false;
         boatFireParticles.Stop();
         _currentBoostAmount = 0;
-        
-        yield return null;
     }
 
     private Coroutine JumpCoroutine()
     {
         _collider.enabled = false;
+        foreach (var spriteRenderer in spriteRenderers) spriteRenderer.sortingOrder = jumpLayer;
         boatWaterParticles.Stop();
 
         boatVisual.ScaleTo(jumpScale, jumpDuration * 0.5f, EaseType.OutQuad).OnComplete(() =>
         {
             boatVisual.ScaleTo(Vector3.one, jumpDuration * 0.5f, EaseType.InQuad).OnComplete(() =>
             {
+                var hit = Physics2D.Raycast(transform.position, Vector2.up, .1f, LayerMask.GetMask("Terrain"));
+                if (hit)
+                {
+                    if (_boostCoroutine != null) StopCoroutine(_boostCoroutine);
+                    StopBoost();
+
+                    transform.position = _originPosition;
+                    OnStuck.Invoke();
+                }
+
                 _collider.enabled = true;
                 boatWaterParticles.Play();
+                foreach (var spriteRenderer in spriteRenderers) spriteRenderer.sortingOrder = normalLayer;
                 _jumpCoroutine = null;
             });
         });
