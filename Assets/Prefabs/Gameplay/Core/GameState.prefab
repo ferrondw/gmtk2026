@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefecaddc2dacf648bb6a9868459f32b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startWait: 1
-  timeToStart: 4
-  startTimePerSecond: 1
+  startWait: 0.25
+  timeToStart: 3
+  startTimePerSecond: 0.5
   startTime: 60
   timePerSecond: 0.08
   minTimePerSecond: 0.05
