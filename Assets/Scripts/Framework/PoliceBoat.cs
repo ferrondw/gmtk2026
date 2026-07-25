@@ -1,9 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using Yakanashe.Yautl;
+using Yakapedia;
 
-public class Boat : MonoBehaviour
+public class PoliceBoat : MonoBehaviour
 {
+    [Header("Police")]
+    [SerializeField] private Transform target;
+    
     [Header("Speed and Steering")]
     [SerializeField] private float maxSpeed = 16f;
     [SerializeField] private float accelerationMultiplier = 12;
@@ -21,10 +25,8 @@ public class Boat : MonoBehaviour
     [SerializeField] private Vector3 jumpScale = new(1.4f, 1.4f, 1.4f);
 
     [Header("Visuals")]
-    [SerializeField] private Transform speedometer;
     [SerializeField] private Transform boatVisual;
     [SerializeField] private ParticleSystem boatWaterParticles;
-    [SerializeField] private ParticleSystem boatFireParticles;
 
     [Header("Gameplay")]
     [SerializeField] private bool disableOnStart;
@@ -47,15 +49,18 @@ public class Boat : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
         boatWaterParticles.Play();
-        SetLocked(disableOnStart);
     }
 
     public void SetLocked(bool newLock) => _locked = newLock;
-
+    
     private void Update()
     {
         if (_locked) return;
-        _inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxisRaw("Vertical"));
+        
+        var direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
+        var dot = Vector2.Dot(transform.right, direction);
+
+        _inputVector = new Vector2(Mathf.Clamp(dot, -1, 1), Mathf.Clamp01(Vector2.Distance(transform.position, target.position) * 0.2f * (1f - Mathf.Abs(dot) * 0.5f)));
     }
 
     private void FixedUpdate()
@@ -101,15 +106,13 @@ public class Boat : MonoBehaviour
         _currentBoostAmount++;
         _startBoostTime = Time.time;
         _boosting = true;
-        boatFireParticles.Play();
-
+ 
         while (Time.time - _startBoostTime < boostDuration)
         {
             yield return null;
         }
         
         _boosting = false;
-        boatFireParticles.Stop();
         _currentBoostAmount = 0;
         
         yield return null;
