@@ -55,12 +55,14 @@ public class PassengerDropoff : MonoBehaviour
         OnActivate.Invoke();
     }
 
-    public void Deliver(Passenger deliveredPassenger)
+    public void Deliver(Passenger deliveredPassenger, int currentMood)
     {
         if (deliveredPassenger.DropoffId != DropoffId) return;
 
         _timer.AddTime(deliveredPassenger.Time);
-        _score.AddScore(deliveredPassenger.Score);
+
+        var finalScore = deliveredPassenger.Score + Mathf.CeilToInt(deliveredPassenger.Score / Mathf.Max(1, deliveredPassenger.MoodStates - currentMood));
+        _score.AddScore(finalScore);
 
         Deactivate();
 

@@ -16,6 +16,7 @@ public class PassengerBullet : MonoBehaviour
     [SerializeField] public UnityEvent OnStart = new();
 
     private Passenger _passenger;
+    private int _mood;
     private PassengerDropoff _dropoff;
     private WaitForSeconds _stayTimer;
 
@@ -33,8 +34,9 @@ public class PassengerBullet : MonoBehaviour
         OnStart.Invoke();
     }
 
-    public void SetPassenger(Passenger newPassenger)
+    public void SetPassenger(Passenger newPassenger, int newMood)
     {
+        _mood = newMood;
         _passenger = newPassenger;
         _dropoff = PassengerDropoff.GetPassengerDropoff(_passenger.DropoffId);
         _dropoff.OnActivate.AddListener(() => 
@@ -55,7 +57,7 @@ public class PassengerBullet : MonoBehaviour
         var dropoff = collision.GetComponent<PassengerDropoff>();
         if (dropoff == _dropoff)
         {
-            dropoff.Deliver(_passenger);
+            dropoff.Deliver(_passenger, _mood);
             _hit = true;
 
             OnHitDropoff.Invoke();
