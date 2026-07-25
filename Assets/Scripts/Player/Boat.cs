@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using Yakanashe.Yautl;
 
 public class Boat : MonoBehaviour
@@ -28,6 +29,9 @@ public class Boat : MonoBehaviour
 
     [Header("Gameplay")]
     [SerializeField] private bool disableOnStart;
+
+    [Header("Events")]
+    [SerializeField] public UnityEvent OnBump;
 
     private bool _locked;
 
@@ -82,6 +86,13 @@ public class Boat : MonoBehaviour
     {
         if (other.gameObject.CompareTag("BoostPanel")) Boost();
         if (other.gameObject.CompareTag("JumpPanel")) Jump();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("BoostPanel")) return;
+        if (collision.gameObject.CompareTag("JumpPanel")) return;
+        OnBump.Invoke();
     }
 
     public void Boost()

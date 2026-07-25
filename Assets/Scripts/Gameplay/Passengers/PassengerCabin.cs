@@ -93,6 +93,7 @@ public class PassengerCabin : MonoBehaviour
     public void ImpactMood(int moodDamage = 1)
     {
         StopAllCoroutines();
+        if (HasPassenger == false) return;
 
         Debug.Log("Passenger mood damage taken! Mood from " + _currentMood.ToString() + " to " + (_currentMood - moodDamage).ToString());
 
@@ -113,14 +114,17 @@ public class PassengerCabin : MonoBehaviour
 
     private void Update()
     {
-        if (_currentPassenger == null) return;
-        if (Input.GetKeyDown(KeyCode.Space)) OnHoldLaunch.Invoke();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (HasPassenger == true) OnHoldLaunch.Invoke();
+        }
         if (Input.GetKeyUp(KeyCode.Space)) Launch();
     }
 
     public void Launch()
     {
         StopAllCoroutines();
+        if (HasPassenger == false) return;
 
         passengerRenderer.sprite = null;
         arrow.StopPointing();
