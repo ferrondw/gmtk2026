@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6151536965824578612}
   - component: {fileID: 4920748267339950525}
   - component: {fileID: 7392815520611006432}
+  - component: {fileID: 6683406614016819361}
   m_Layer: 0
   m_Name: GameState
   m_TagString: GameState
@@ -93,3 +94,17 @@ MonoBehaviour:
   OnScoreChange:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6683406614016819361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381418857125245134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784c0021f466d2342a5467588aa22674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicId: 0
+  randomMusicIdList: 
