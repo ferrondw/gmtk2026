@@ -63,7 +63,11 @@ public class PassengerBullet : MonoBehaviour
             OnHitDropoff.Invoke();
 
             Destroy(gameObject);
-            return;
+        }
+
+        if (collision.TryGetComponent<PoliceBoat>(out var policeBoat))
+        {
+            policeBoat.Explode();
         }
     }
 

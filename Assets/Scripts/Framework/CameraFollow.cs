@@ -44,7 +44,7 @@ public class CameraFollow : MonoBehaviour
         var destination = transform.position + delta;
         transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, smoothTime);
         transform.position += _shakeOffset;
-        _cam.orthographicSize = Mathf.Lerp(_cam.orthographicSize, 12 + _targetRigidbody.velocity.magnitude * 0.5f, Time.deltaTime * 2);
+        _cam.orthographicSize = Mathf.Lerp(_cam.orthographicSize, 13 + _targetRigidbody.velocity.magnitude * 0.55f, Time.deltaTime * 2);
         ClampCamera();
     }
 

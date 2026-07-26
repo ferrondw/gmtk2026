@@ -1,35 +1,32 @@
 using System.Collections;
 using UnityEngine;
 using Yakanashe.Yautl;
-using Yakapedia;
 
 public class PoliceBoat : MonoBehaviour
 {
-    [Header("Police")]
-    [SerializeField] private Transform target;
-    
-    [Header("Speed and Steering")]
-    [SerializeField] private float maxSpeed = 16f;
+    [Header("Police")] [SerializeField] private Transform target;
+
+    [Header("Speed and Steering")] [SerializeField]
+    private float maxSpeed = 16f;
+
     [SerializeField] private float accelerationMultiplier = 12;
     [SerializeField] private float steerMultiplier = 2;
     [SerializeField] private float steerLimiterMultiplier = 2;
 
-    [Header("Boosting")]
-    [SerializeField] private float boostDuration = 4f;
+    [Header("Boosting")] [SerializeField] private float boostDuration = 4f;
     [SerializeField] private float boostSpeed = 25f;
     [SerializeField] private float boostSteerLimiterMultiplier = 20f;
     [SerializeField] private float boostAmountMultiplier = 0.7f;
-    
-    [Header("Jumping")]
-    [SerializeField] private float jumpDuration = 2f;
+
+    [Header("Jumping")] [SerializeField] private float jumpDuration = 2f;
     [SerializeField] private Vector3 jumpScale = new(1.4f, 1.4f, 1.4f);
 
-    [Header("Visuals")]
-    [SerializeField] private Transform boatVisual;
+    [Header("Visuals")] [SerializeField] private Transform boatVisual;
+    [SerializeField] private SpriteRenderer boatSprite;
     [SerializeField] private ParticleSystem boatWaterParticles;
+    [SerializeField] private ParticleSystem explodeParticles;
 
-    [Header("Gameplay")]
-    [SerializeField] private bool disableOnStart;
+    [Header("Gameplay")] [SerializeField] private bool disableOnStart;
 
     private bool _locked;
 
@@ -39,6 +36,7 @@ public class PoliceBoat : MonoBehaviour
     private float _rotationAngle;
 
     private Coroutine _jumpCoroutine;
+    private Coroutine _explodeCoroutine;
     private Coroutine _boostCoroutine;
     private float _startBoostTime;
     private bool _boosting;
@@ -46,28 +44,44 @@ public class PoliceBoat : MonoBehaviour
 
     private void Start()
     {
+        target = FindAnyObjectByType<Boat>().GetComponent<Transform>();
         _rb = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
-        boatWaterParticles.Play();
+
+        _collider.enabled = false;
+
+        boatVisual.localScale = Vector3.one * 2f;
+        boatSprite.color = new Color(1f, 1f, 1f, 0f);
+
+        boatSprite.ColorTo(Color.white, 0.8f, EaseType.OutCubic);
+        boatVisual.ScaleTo(Vector3.one, 0.8f, EaseType.OutBack).OnComplete(() =>
+        {
+            boatWaterParticles.Play();
+            _collider.enabled = true;
+        });
     }
 
     public void SetLocked(bool newLock) => _locked = newLock;
-    
+
     private void Update()
     {
         if (_locked) return;
-        
+
         var direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
         var dot = Vector2.Dot(transform.right, direction);
 
-        _inputVector = new Vector2(Mathf.Clamp(dot, -1, 1), Mathf.Clamp01(Vector2.Distance(transform.position, target.position) * 0.2f * (1f - Mathf.Abs(dot) * 0.5f)));
+        _inputVector = new Vector2(Mathf.Clamp(dot, -1, 1),
+            Mathf.Clamp01(Vector2.Distance(transform.position, target.position) * 0.2f * (1f - Mathf.Abs(dot) * 0.5f)));
     }
 
     private void FixedUpdate()
     {
         if (_locked) return;
 
-        _rotationAngle -= _inputVector.x * steerMultiplier * Mathf.Clamp01(_rb.velocity.magnitude / (_boosting ? boostSteerLimiterMultiplier : steerLimiterMultiplier));
+        _rotationAngle -= _inputVector.x * steerMultiplier * Mathf.Clamp01(_rb.velocity.magnitude /
+                                                                           (_boosting
+                                                                               ? boostSteerLimiterMultiplier
+                                                                               : steerLimiterMultiplier));
         _rb.MoveRotation(_rotationAngle);
         // speedometer.localEulerAngles = new Vector3(0, 0, Mathf.Lerp(100f, -100f, Mathf.Clamp01(_rb.velocity.magnitude / minMaxSpeed.y)));
 
@@ -79,7 +93,9 @@ public class PoliceBoat : MonoBehaviour
         if (!_boosting && velocityUp < -maxSpeed * 0.5f && _inputVector.y < 0) return;
         if (!_boosting && velocityUp > maxSpeed && _inputVector.y > 0) return;
 
-        var engineForce = transform.up * (_boosting ? boostSpeed + (_currentBoostAmount * boostAmountMultiplier) : accelerationMultiplier * _inputVector.y);
+        var engineForce = transform.up * (_boosting
+            ? boostSpeed + (_currentBoostAmount * boostAmountMultiplier)
+            : accelerationMultiplier * _inputVector.y);
         _rb.AddForce(engineForce, ForceMode2D.Force);
     }
 
@@ -101,20 +117,26 @@ public class PoliceBoat : MonoBehaviour
         _jumpCoroutine = StartCoroutine(nameof(JumpCoroutine));
     }
 
+    public void Explode()
+    {
+        if (_explodeCoroutine != null) return;
+        _explodeCoroutine = StartCoroutine(nameof(ExplodeCoroutine));
+    }
+
     private IEnumerator BoostCoroutine()
     {
         _currentBoostAmount++;
         _startBoostTime = Time.time;
         _boosting = true;
- 
+
         while (Time.time - _startBoostTime < boostDuration)
         {
             yield return null;
         }
-        
+
         _boosting = false;
         _currentBoostAmount = 0;
-        
+
         yield return null;
     }
 
@@ -132,6 +154,21 @@ public class PoliceBoat : MonoBehaviour
                 _jumpCoroutine = null;
             });
         });
+
+        return null;
+    }
+
+    private Coroutine ExplodeCoroutine()
+    {
+        _collider.enabled = false;
+        boatSprite.color = Color.clear;
+        boatWaterParticles.Stop();
+
+        transform.ScaleTo(Vector2.one, 1, EaseType.InCubic).OnComplete(() =>
+        {
+            WaveSpawner.Instance.DestroyBoat(gameObject);
+        });
+        explodeParticles.Play();
 
         return null;
     }
