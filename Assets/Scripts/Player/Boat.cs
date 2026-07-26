@@ -94,7 +94,12 @@ public class Boat : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("BoostPanel")) Boost();
+        if (other.gameObject.CompareTag("BoostPanel"))
+        {
+            Boost();
+            var boostCan = other.GetComponent<BoostCan>();
+            if (boostCan != null) boostCan.Use();
+        }
         if (other.gameObject.CompareTag("JumpPanel")) Jump();
     }
 
@@ -170,4 +175,9 @@ public class Boat : MonoBehaviour
 
         return null;
     }
+
+
+    private void OnDisable() { StopAllCoroutines(); }
+    private void OnDestroy() { StopAllCoroutines(); }
+    private void OnApplicationQuit() { StopAllCoroutines(); }
 }
