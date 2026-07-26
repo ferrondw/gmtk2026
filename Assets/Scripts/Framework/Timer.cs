@@ -56,7 +56,7 @@ public class Timer : MonoBehaviour
         Debug.Log("Starting start signal timer");
 
         OnBegin.Invoke();
-        for (int time = timeToStart; time > 0; time--)
+        for (int time = timeToStart; time > -1; time--)
         {
             yield return _startSignalTimer;
             OnTimeStartUpdate.Invoke(time);

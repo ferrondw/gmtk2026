@@ -13,16 +13,19 @@ public class TimerVisual : MonoBehaviour
     [SerializeField] private string gameStateTag = "GameState";
 
     [Header("Start Animation")]
-    [SerializeField] private bool startHidden = true;
+    [SerializeField] private RectTransform timeSegment;
     [SerializeField] private float startScaleTime = .25f;
     [SerializeField] private EaseType scaleEaseType = EaseType.InCirc;
+
+    [Header("Start Signal")]
+    [SerializeField] private TextMeshProUGUI startLabel;
 
     [Header("Events")]
     [SerializeField] public UnityEvent OnLoseTime = new();
     [SerializeField] public UnityEvent OnAddedTime = new();
+    [SerializeField] public UnityEvent OnStartSignalUpdate = new();
 
     private float _lastTimeUpdate;
-    private RectTransform _rectTransform;
     private bool _isHidden;
 
     private void Start()
@@ -30,19 +33,31 @@ public class TimerVisual : MonoBehaviour
         var timer = GameObject.FindGameObjectWithTag(gameStateTag).GetComponent<Timer>();
         timer.OnTimeUpdate.AddListener(DisplayTime);
 
-        if (startHidden)
+        timeSegment.localScale = Vector2.zero;
+        _isHidden = true;
+
+        timer.OnTimeStartUpdate.AddListener(UpdateStartSignal);
+        startLabel.enabled = false;
+    }
+
+    private void UpdateStartSignal(int time)
+    {
+        if (time < 1)
         {
-            _rectTransform = GetComponent<RectTransform>();
-            _rectTransform.localScale = Vector2.zero;
-            _isHidden = true;
+            startLabel.enabled = false;
+            return;
         }
+        startLabel.text = time.ToString();
+        startLabel.enabled = true;
+
+        OnStartSignalUpdate.Invoke();
     }
 
     private void DisplayTime(float newTime) // ADD EFFECTS OF ADDING VS LOSING TIME LATER
     {
         if (_isHidden)
         {
-            _rectTransform.ScaleTo(Vector2.one, startScaleTime, scaleEaseType);
+            timeSegment.ScaleTo(Vector2.one, startScaleTime, scaleEaseType);
             _isHidden = false;
         }
 
