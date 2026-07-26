@@ -4910,7 +4910,7 @@ GameObject:
   - component: {fileID: 7577358326117526349}
   - component: {fileID: 7733421142076064498}
   - component: {fileID: 1119983863736219356}
-  - component: {fileID: 6885868401057837340}
+  - component: {fileID: 4395080454580759428}
   m_Layer: 0
   m_Name: WaterParticles
   m_TagString: Untagged
@@ -9741,7 +9741,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &6885868401057837340
+--- !u!114 &4395080454580759428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9750,10 +9750,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5836650733485191382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475bd54fef8f7cb48804744f75042356, type: 3}
+  m_Script: {fileID: 11500000, guid: d5316965aca7e584f8a62103e6752d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyObject: {fileID: 7951761695012090518}
+  boatObject: {fileID: 7951761695012090518}
 --- !u!1 &6524308889898477948
 GameObject:
   m_ObjectHideFlags: 0
