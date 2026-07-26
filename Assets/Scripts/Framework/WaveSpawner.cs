@@ -30,7 +30,7 @@ public class WaveSpawner : MonoBehaviour
 
     private List<GameObject> _currentBoats = new();
 
-    private void Start()
+    public void StartSpawning()
     {
         StartCoroutine(nameof(PersistentSpawnBoats));
     }
@@ -49,6 +49,8 @@ public class WaveSpawner : MonoBehaviour
 
     private IEnumerator PersistentSpawnBoats()
     {
+        yield return new WaitForSeconds(10);
+        
         while (true)
         {
             if (_currentBoats.Count < _currentMaxAllowedOnScreen)

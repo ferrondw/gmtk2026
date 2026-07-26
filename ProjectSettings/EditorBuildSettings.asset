@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/Menu.unity
     guid: ae19d9486f5b8364d97330f922075660
   - enabled: 1
-    path: Assets/Scenes/Game/MainWave.unity
-    guid: 587d293a837fdfd4e84939028d5420d5
+    path: Assets/Scenes/Game/Main.unity
+    guid: da925b59fec9fd84a81a9228d0803bd9
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
