@@ -45,7 +45,10 @@ GameObject:
   - component: {fileID: 5528277461844604186}
   - component: {fileID: 5933063995855362912}
   - component: {fileID: 8156581493161994238}
+  - component: {fileID: 6798381878292295699}
+  - component: {fileID: 9037162078494597433}
   - component: {fileID: 8113230118008056807}
+  - component: {fileID: 3204028853201374649}
   m_Layer: 0
   m_Name: Pickup
   m_TagString: Untagged
@@ -189,6 +192,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6798381878292295699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177501731331667343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library: []
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: d402650ed878a5a4487e9f7960fa47a5, type: 3}
+--- !u!114 &9037162078494597433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177501731331667343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CategoryHash: 0.000000010297716
+  m_labelHash: 9.329738e-35
+  m_SpriteKey: 0
+  m_SpriteHash: 239272427
 --- !u!114 &8113230118008056807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +236,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isVisible: 0
   followerTag: Player
+--- !u!111 &3204028853201374649
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177501731331667343}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: db04f78421cdc6941b64501586aa9939, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: db04f78421cdc6941b64501586aa9939, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 1
 --- !u!1 &2376974590349140020
 GameObject:
   m_ObjectHideFlags: 0

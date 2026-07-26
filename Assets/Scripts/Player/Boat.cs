@@ -53,6 +53,8 @@ public class Boat : MonoBehaviour
     private bool _boosting;
     private int _currentBoostAmount;
 
+    public Vector2 InputVector => _inputVector;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();

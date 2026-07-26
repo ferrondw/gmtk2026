@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Bullet
+    m_Hash: 1035941187
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Passenger_4
+      m_Hash: 26591985
+      m_Sprite: {fileID: -9019786622573377811, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -9019786622573377811, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+    - m_Name: Passenger_6
+      m_Hash: 798729181
+      m_Sprite: {fileID: 4012455570576574245, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4012455570576574245, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+    - m_Name: Passenger_5
+      m_Hash: 915599975
+      m_Sprite: {fileID: -2434347713717794197, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2434347713717794197, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 3
+  - m_Name: Hi! :D
+    m_Hash: 842066389
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Passenger_0
+      m_Hash: 116917992
+      m_Sprite: {fileID: -1330291129118527448, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1330291129118527448, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+    - m_Name: Passenger_1
+      m_Hash: 838809214
+      m_Sprite: {fileID: -4211695060957981550, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4211695060957981550, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+    - m_Name: Passenger_2
+      m_Hash: 687237060
+      m_Sprite: {fileID: -6221377131471540031, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -6221377131471540031, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+    - m_Name: Passenger_7
+      m_Hash: 412914507
+      m_Sprite: {fileID: 189650460, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 189650460, guid: 8c48be30acb66574e81679aa4e393d4b, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 639206308539545293
+  m_Version: 1
