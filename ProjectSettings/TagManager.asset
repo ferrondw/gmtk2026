@@ -8,6 +8,7 @@ TagManager:
   - ProjectileContainer
   - GameState
   - JumpPanel
+  - StartGame
   layers:
   - Default
   - TransparentFX
