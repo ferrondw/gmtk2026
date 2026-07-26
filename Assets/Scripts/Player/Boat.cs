@@ -37,6 +37,8 @@ public class Boat : MonoBehaviour
 
     [Header("Events")]
     [SerializeField] public UnityEvent OnBump;
+    [SerializeField] public UnityEvent OnBoost;
+    [SerializeField] public UnityEvent OnJump;
     [SerializeField] public UnityEvent OnStuck;
 
     private bool _locked;
@@ -99,8 +101,14 @@ public class Boat : MonoBehaviour
             Boost();
             var boostCan = other.GetComponent<BoostCan>();
             if (boostCan != null) boostCan.Use();
+
+            OnBoost.Invoke();
         }
-        if (other.gameObject.CompareTag("JumpPanel")) Jump();
+        if (other.gameObject.CompareTag("JumpPanel"))
+        {
+            Jump();
+            OnJump.Invoke();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
