@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
         {
             transition.In(0.02f, () =>
             {
-                SceneManager.LoadScene("Main");
+                SceneManager.LoadScene(1);
             });
         }
     }
