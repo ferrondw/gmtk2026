@@ -24,6 +24,7 @@ public class Timer : MonoBehaviour
     [Header("Loop Events")]
     [SerializeField] public UnityEvent<float> OnTimeUpdate = new();
     [SerializeField] public UnityEvent OnDeplete = new();
+    [SerializeField] public UnityEvent OnRemove = new();
     [SerializeField] public UnityEvent OnAdd = new();
     [SerializeField] public UnityEvent OnLose = new();
 
@@ -115,6 +116,7 @@ public class Timer : MonoBehaviour
 
         _currentTime -= (float)addedTime;
         OnTimeUpdate.Invoke(_currentTime);
+        OnRemove.Invoke();
         StartCoroutine(CoreTimerLoop());
     }
 

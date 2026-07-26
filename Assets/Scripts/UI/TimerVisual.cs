@@ -37,6 +37,7 @@ public class TimerVisual : MonoBehaviour
         _isHidden = true;
 
         timer.OnTimeStartUpdate.AddListener(UpdateStartSignal);
+        timer.OnRemove.AddListener(() => OnLoseTime.Invoke());
         startLabel.enabled = false;
     }
 
@@ -79,7 +80,6 @@ public class TimerVisual : MonoBehaviour
         }
 
         _lastTimeUpdate = newTime;
-        OnLoseTime.Invoke();
 
         if (clockArrow.rotation.eulerAngles.z + rotationPerSecond < -360 || clockArrow.rotation.eulerAngles.z + rotationPerSecond > 360)
         {
