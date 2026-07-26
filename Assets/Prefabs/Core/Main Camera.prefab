@@ -992,9 +992,74 @@ MonoBehaviour:
   hiscoreLabel: {fileID: 3230299888783287873}
   retryButton: {fileID: 657285786492710288}
   gameStateTag: GameState
+  sceneTransition: {fileID: 461453236677485832}
   OnGameOver:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &4286633389198333796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7759132179900419914}
+  - component: {fileID: 324753932964704361}
+  - component: {fileID: 461453236677485832}
+  m_Layer: 0
+  m_Name: Wiper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7759132179900419914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4286633389198333796}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7323897838715522798}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &324753932964704361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4286633389198333796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e768f547128aea04396d796efb64d8d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionMaterial: {fileID: 2100000, guid: e6ad451d537470d458c983d0af4e3496, type: 2}
+  transitionCollection: {fileID: 11400000, guid: 1697c9c05cfd4614a897bcf246e56154, type: 2}
+  transitionDuration: 0.6
+  Angle: 0
+  SelectedTransitionIndex: 4
+--- !u!114 &461453236677485832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4286633389198333796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa59538331e00da4eb9fd3cfeddf5139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transition: {fileID: 324753932964704361}
+  duration: 0.02
 --- !u!1 &4304574830810409517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1170,7 @@ Transform:
   m_Children:
   - {fileID: 6225120839046255856}
   - {fileID: 3227620701648892741}
+  - {fileID: 7759132179900419914}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2161036633180379058

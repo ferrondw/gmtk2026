@@ -18,6 +18,7 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hiscoreLabel;
     [SerializeField] private Button retryButton;
     [SerializeField] private string gameStateTag = "GameState";
+    [SerializeField] private SceneTransition sceneTransition;
 
     [Header("Events")]
     [SerializeField] private UnityEvent OnGameOver = new();
@@ -78,8 +79,8 @@ public class GameOverScreen : MonoBehaviour
     private void retry()
     {
         retryButton.interactable = false;
-        // ADD A TRANSITION
+
         PassengerDropoff.instances.Clear();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        sceneTransition.TransitionTo(SceneManager.GetActiveScene().buildIndex);
     }
 }
