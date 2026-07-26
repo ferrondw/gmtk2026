@@ -62,7 +62,7 @@ public class TimerVisual : MonoBehaviour
             _isHidden = false;
         }
 
-        numericTimer.text = newTime.ToString("f1");
+        numericTimer.text = Mathf.Max(0f, newTime).ToString("f1");
 
         if (_lastTimeUpdate == 0f)
         {

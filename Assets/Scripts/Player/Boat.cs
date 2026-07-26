@@ -106,6 +106,7 @@ public class Boat : MonoBehaviour
         }
         if (other.gameObject.CompareTag("JumpPanel"))
         {
+            if (_jumpCoroutine != null) return;
             Jump();
             OnJump.Invoke();
         }
